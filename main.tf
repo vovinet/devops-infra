@@ -65,7 +65,7 @@ resource "yandex_compute_instance" "prod-node1" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "anything:${file(var.ssh_pub_key)}"
   }
 
   scheduling_policy {
@@ -97,7 +97,7 @@ resource "yandex_compute_instance" "prod-node2" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "anything:${file(var.ssh_pub_key)}"
   }
 
   scheduling_policy {
@@ -129,7 +129,7 @@ resource "yandex_compute_instance" "prod-node3" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "anything:${file(var.ssh_pub_key)}"
   }
 
   scheduling_policy {
