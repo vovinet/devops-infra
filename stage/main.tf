@@ -6,7 +6,7 @@ resource "yandex_vpc_subnet" "stage-subnet" {
   name           = "Stage-Subnet-0"
   zone           = var.yc_zone
   network_id     = "${yandex_vpc_network.stage_net.id}"
-  v4_cidr_blocks = ["10.0.0.0/24"]
+  v4_cidr_blocks = ["10.0.0.0/21"]
 }
 
 resource "yandex_compute_instance" "stage-k8s-cp1" {
