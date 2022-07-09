@@ -2,15 +2,14 @@ resource "yandex_vpc_network" "stage_net" {
   name = "Stage-Net"
 }
 
-resource "yandex_vpc_subnet" "Stage-subnet" {
+resource "yandex_vpc_subnet" "stage-subnet" {
   name           = "Stage-Subnet-0"
   zone           = var.yc_zone
   network_id     = "${yandex_vpc_network.stage_net.id}"
   v4_cidr_blocks = ["10.0.0.0/24"]
 }
 
-resource "yandex_compute_instance" "cp1" {
-  name = "k8s-Stage-cp1"
+resource "yandex_compute_instance" "stage-k8s-cp1" {
   folder_id = var.os_image_id
 
   resources {
@@ -28,7 +27,7 @@ resource "yandex_compute_instance" "cp1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.Stage-subnet.id
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
     nat       = true
   }
 
@@ -41,8 +40,7 @@ resource "yandex_compute_instance" "cp1" {
   }
 }
 
-resource "yandex_compute_instance" "Stage-node1" {
-  name = "k8s-Stage-node1"
+resource "yandex_compute_instance" "stage-k8s-node1" {
   folder_id = var.os_image_id
 
   resources {
@@ -60,7 +58,7 @@ resource "yandex_compute_instance" "Stage-node1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.Stage-subnet.id
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
     nat       = true
   }
 
@@ -73,8 +71,7 @@ resource "yandex_compute_instance" "Stage-node1" {
   }
 }
 
-resource "yandex_compute_instance" "Stage-node2" {
-  name = "k8s-Stage-node2"
+resource "yandex_compute_instance" "stage-k8s-node2" {
   folder_id = var.os_image_id
 
   resources {
@@ -92,7 +89,7 @@ resource "yandex_compute_instance" "Stage-node2" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.Stage-subnet.id
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
     nat       = true
   }
 
@@ -105,8 +102,7 @@ resource "yandex_compute_instance" "Stage-node2" {
   }
 }
 
-resource "yandex_compute_instance" "Stage-node3" {
-  name = "k8s-Stage-node3"
+resource "yandex_compute_instance" "stage-node3" {
   folder_id = var.os_image_id
 
   resources {
@@ -124,7 +120,7 @@ resource "yandex_compute_instance" "Stage-node3" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.Stage-subnet.id
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
     nat       = true
   }
 
