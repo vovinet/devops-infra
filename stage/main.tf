@@ -1,16 +1,16 @@
-resource "yandex_vpc_network" "prod_net" {
-  name = "Prod-Net"
+resource "yandex_vpc_network" "stage_net" {
+  name = "Stage-Net"
 }
 
-resource "yandex_vpc_subnet" "prod-subnet" {
-  name           = "Prod-Subnet-0"
+resource "yandex_vpc_subnet" "Stage-subnet" {
+  name           = "Stage-Subnet-0"
   zone           = var.yc_zone
-  network_id     = "${yandex_vpc_network.prod_net.id}"
+  network_id     = "${yandex_vpc_network.stage_net.id}"
   v4_cidr_blocks = ["10.0.0.0/24"]
 }
 
 resource "yandex_compute_instance" "cp1" {
-  name = "k8s-prod-cp1"
+  name = "k8s-Stage-cp1"
   folder_id = var.os_image_id
 
   resources {
@@ -28,7 +28,7 @@ resource "yandex_compute_instance" "cp1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.prod-subnet.id
+    subnet_id = yandex_vpc_subnet.Stage-subnet.id
     nat       = true
   }
 
@@ -41,8 +41,8 @@ resource "yandex_compute_instance" "cp1" {
   }
 }
 
-resource "yandex_compute_instance" "prod-node1" {
-  name = "k8s-prod-node1"
+resource "yandex_compute_instance" "Stage-node1" {
+  name = "k8s-Stage-node1"
   folder_id = var.os_image_id
 
   resources {
@@ -60,7 +60,7 @@ resource "yandex_compute_instance" "prod-node1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.prod-subnet.id
+    subnet_id = yandex_vpc_subnet.Stage-subnet.id
     nat       = true
   }
 
@@ -73,8 +73,8 @@ resource "yandex_compute_instance" "prod-node1" {
   }
 }
 
-resource "yandex_compute_instance" "prod-node2" {
-  name = "k8s-prod-node2"
+resource "yandex_compute_instance" "Stage-node2" {
+  name = "k8s-Stage-node2"
   folder_id = var.os_image_id
 
   resources {
@@ -92,7 +92,7 @@ resource "yandex_compute_instance" "prod-node2" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.prod-subnet.id
+    subnet_id = yandex_vpc_subnet.Stage-subnet.id
     nat       = true
   }
 
@@ -105,8 +105,8 @@ resource "yandex_compute_instance" "prod-node2" {
   }
 }
 
-resource "yandex_compute_instance" "prod-node3" {
-  name = "k8s-prod-node3"
+resource "yandex_compute_instance" "Stage-node3" {
+  name = "k8s-Stage-node3"
   folder_id = var.os_image_id
 
   resources {
@@ -124,7 +124,7 @@ resource "yandex_compute_instance" "prod-node3" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.prod-subnet.id
+    subnet_id = yandex_vpc_subnet.Stage-subnet.id
     nat       = true
   }
 
