@@ -10,7 +10,7 @@ resource "yandex_vpc_subnet" "stage-subnet" {
 }
 
 resource "yandex_compute_instance" "stage-k8s-cp1" {
-  folder_id = var.os_image_id
+  folder_id = var.folder_id
 
   resources {
     cores  = 2
@@ -41,7 +41,7 @@ resource "yandex_compute_instance" "stage-k8s-cp1" {
 }
 
 resource "yandex_compute_instance" "stage-k8s-node1" {
-  folder_id = var.os_image_id
+  folder_id = var.folder_id
 
   resources {
     cores  = 2
@@ -72,7 +72,7 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
 }
 
 resource "yandex_compute_instance" "stage-k8s-node2" {
-  folder_id = var.os_image_id
+  folder_id = var.folder_id
 
   resources {
     cores  = 2
@@ -103,7 +103,7 @@ resource "yandex_compute_instance" "stage-k8s-node2" {
 }
 
 resource "yandex_compute_instance" "stage-node3" {
-  folder_id = var.os_image_id
+  folder_id = var.folder_id
 
   resources {
     cores  = 2
