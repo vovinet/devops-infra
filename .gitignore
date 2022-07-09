@@ -1,2 +1,2 @@
-variables.tf
 .terraform*
+stage/variables_sensitive.tf
