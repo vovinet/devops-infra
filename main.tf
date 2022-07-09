@@ -4,14 +4,14 @@ resource "yandex_vpc_network" "prod_net" {
 
 resource "yandex_vpc_subnet" "prod-subnet" {
   name           = "Prod-Subnet-0"
-  zone           = local.yc_zone
+  zone           = var.yc_zone
   network_id     = "${yandex_vpc_network.prod_net.id}"
   v4_cidr_blocks = ["10.0.0.0/24"]
 }
 
 resource "yandex_compute_instance" "cp1" {
   name = "k8s-prod-cp1"
-  folder_id = local.os_image_id
+  folder_id = var.os_image_id
 
   resources {
     cores  = 2
@@ -21,7 +21,7 @@ resource "yandex_compute_instance" "cp1" {
 
   boot_disk {
     initialize_params {
-      image_id = local.os_image_id
+      image_id = var.os_image_id
       size = 5
       type = "network-hdd"
     }
@@ -33,7 +33,7 @@ resource "yandex_compute_instance" "cp1" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "anything:$var.ssh_pub_key"
   }
 
   scheduling_policy {
@@ -43,7 +43,7 @@ resource "yandex_compute_instance" "cp1" {
 
 resource "yandex_compute_instance" "prod-node1" {
   name = "k8s-prod-node1"
-  folder_id = local.os_image_id
+  folder_id = var.os_image_id
 
   resources {
     cores  = 2
@@ -53,7 +53,7 @@ resource "yandex_compute_instance" "prod-node1" {
 
   boot_disk {
     initialize_params {
-      image_id = local.os_image_id
+      image_id = var.os_image_id
       size = 5
       type = "network-hdd"
     }
@@ -65,7 +65,7 @@ resource "yandex_compute_instance" "prod-node1" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file(var.ssh_pub_key)}"
+    ssh-keys = "anything:$var.ssh_pub_key"
   }
 
   scheduling_policy {
@@ -75,7 +75,7 @@ resource "yandex_compute_instance" "prod-node1" {
 
 resource "yandex_compute_instance" "prod-node2" {
   name = "k8s-prod-node2"
-  folder_id = local.os_image_id
+  folder_id = var.os_image_id
 
   resources {
     cores  = 2
@@ -85,7 +85,7 @@ resource "yandex_compute_instance" "prod-node2" {
 
   boot_disk {
     initialize_params {
-      image_id = local.os_image_id
+      image_id = var.os_image_id
       size = 5
       type = "network-hdd"
     }
@@ -97,7 +97,7 @@ resource "yandex_compute_instance" "prod-node2" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file(var.ssh_pub_key)}"
+    ssh-keys = "anything:$var.ssh_pub_key"
   }
 
   scheduling_policy {
@@ -107,7 +107,7 @@ resource "yandex_compute_instance" "prod-node2" {
 
 resource "yandex_compute_instance" "prod-node3" {
   name = "k8s-prod-node3"
-  folder_id = local.os_image_id
+  folder_id = var.os_image_id
 
   resources {
     cores  = 2
@@ -117,7 +117,7 @@ resource "yandex_compute_instance" "prod-node3" {
 
   boot_disk {
     initialize_params {
-      image_id = local.os_image_id
+      image_id = var.os_image_id
       size = 5
       type = "network-hdd"
     }
@@ -129,7 +129,7 @@ resource "yandex_compute_instance" "prod-node3" {
   }
 
   metadata = {
-    ssh-keys = "anything:${file(var.ssh_pub_key)}"
+    ssh-keys = "anything:$var.ssh_pub_key"
   }
 
   scheduling_policy {
