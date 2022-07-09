@@ -1,2 +1,3 @@
 .terraform*
 stage/variables_sensitive.tf
+stage/stage-sa.json
