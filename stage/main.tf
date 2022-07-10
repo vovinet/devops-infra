@@ -10,6 +10,7 @@ resource "yandex_vpc_subnet" "stage-subnet" {
 }
 
 resource "yandex_compute_instance" "stage-k8s-cp1" {
+  name = "stage-k8s-cp1"
   folder_id = var.folder_id
 
   resources {
