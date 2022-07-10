@@ -42,6 +42,7 @@ resource "yandex_compute_instance" "stage-k8s-cp1" {
 }
 
 resource "yandex_compute_instance" "stage-k8s-node1" {
+  name = "stage-k8s-node1"
   folder_id = var.folder_id
 
   resources {
@@ -73,6 +74,7 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
 }
 
 resource "yandex_compute_instance" "stage-k8s-node2" {
+  name = "stage-k8s-node2"
   folder_id = var.folder_id
 
   resources {
@@ -104,6 +106,7 @@ resource "yandex_compute_instance" "stage-k8s-node2" {
 }
 
 resource "yandex_compute_instance" "stage-node3" {
+  name = "stage-k8s-node3"
   folder_id = var.folder_id
 
   resources {
