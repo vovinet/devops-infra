@@ -22,7 +22,7 @@ resource "yandex_compute_instance" "stage-k8s-cp1" {
   boot_disk {
     initialize_params {
       image_id = var.os_image_id
-      size = 5
+      size = 20
       type = "network-hdd"
     }
   }
@@ -54,7 +54,7 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
   boot_disk {
     initialize_params {
       image_id = var.os_image_id
-      size = 5
+      size = 20
       type = "network-hdd"
     }
   }
@@ -86,7 +86,7 @@ resource "yandex_compute_instance" "stage-k8s-node2" {
   boot_disk {
     initialize_params {
       image_id = var.os_image_id
-      size = 5
+      size = 20
       type = "network-hdd"
     }
   }
@@ -118,7 +118,7 @@ resource "yandex_compute_instance" "stage-node3" {
   boot_disk {
     initialize_params {
       image_id = var.os_image_id
-      size = 5
+      size = 20
       type = "network-hdd"
     }
   }
