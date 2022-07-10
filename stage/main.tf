@@ -33,7 +33,7 @@ resource "yandex_compute_instance" "stage-k8s-cp1" {
   }
 
   metadata = {
-    ssh-keys = "anything:$var.ssh_pub_key"
+    user-data = file("cloud_config.yaml")
   }
 
   scheduling_policy {
@@ -65,7 +65,7 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
   }
 
   metadata = {
-    ssh-keys = "anything:$var.ssh_pub_key"
+    user-data = file("cloud_config.yaml")
   }
 
   scheduling_policy {
@@ -97,7 +97,7 @@ resource "yandex_compute_instance" "stage-k8s-node2" {
   }
 
   metadata = {
-    ssh-keys = "anything:$var.ssh_pub_key"
+    user-data = file("cloud_config.yaml")
   }
 
   scheduling_policy {
@@ -129,7 +129,7 @@ resource "yandex_compute_instance" "stage-node3" {
   }
 
   metadata = {
-    ssh-keys = "anything:$var.ssh_pub_key"
+    user-data = file("cloud_config.yaml")
   }
 
   scheduling_policy {
