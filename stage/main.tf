@@ -9,15 +9,15 @@ resource "yandex_vpc_subnet" "stage-subnet" {
   v4_cidr_blocks = ["10.0.0.0/24"]
 }
 
-resource "yandex_vpc_address" "addr" {
-  name = "cp_addr"
+resource "yandex_vpc_address" "addr_cp" {
+  name = "Control Plane Public IP"
   external_ipv4_address {
     zone_id = var.yc_zone
   }
 }
 
-resource "yandex_vpc_address" "addr" {
-  name = "node_addr"
+resource "yandex_vpc_address" "addr_node" {
+  name = "Worker Node Public IP"
   external_ipv4_address {
     zone_id = var.yc_zone
   }
@@ -44,7 +44,7 @@ resource "yandex_compute_instance" "stage-k8s-cp1" {
   network_interface {
     subnet_id = yandex_vpc_subnet.stage-subnet.id
     ip_address = "10.0.0.10"
-    nat_ip_address = cp_addr.address
+    nat_ip_address = addr_cp.address
     nat       = true
   }
 
@@ -78,7 +78,7 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
   network_interface {
     subnet_id = yandex_vpc_subnet.stage-subnet.id
     ip_address = "10.0.0.11"
-    nat_ip_address = node_addr.address
+    nat_ip_address = addr_node.address
     nat       = true
   }
 
