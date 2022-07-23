@@ -44,7 +44,7 @@ resource "yandex_compute_instance" "stage-k8s-cp1" {
   network_interface {
     subnet_id = yandex_vpc_subnet.stage-subnet.id
     ip_address = "10.0.0.10"
-    nat_ip_address = yandex_vpc_address.addr_cp[0].address
+    nat_ip_address = "51.250.90.61"
     nat       = true
   }
 
@@ -78,7 +78,7 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
   network_interface {
     subnet_id = yandex_vpc_subnet.stage-subnet.address
     ip_address = "10.0.0.11"
-    nat_ip_address = yandex_vpc_address.addr_node[0].address
+    nat_ip_address = "51.250.12.6"
     nat       = true
   }
 
