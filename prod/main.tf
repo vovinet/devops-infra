@@ -5,7 +5,7 @@ resource "yandex_vpc_network" "prod_net" {
 resource "yandex_vpc_subnet" "prod_subnet" {
   name           = "Prod-Subnet-0"
   zone           = var.yc_zone
-  network_id     = "${yandex_vpc_network.stage_net.id}"
+  network_id     = "${yandex_vpc_network.prod_net.id}"
   v4_cidr_blocks = ["10.255.255.0/24"]
 }
 
@@ -88,7 +88,7 @@ resource "yandex_compute_instance" "prod_k8s_node1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    subnet_id = yandex_vpc_subnet.prod_subnet.id
     ip_address = "10.0.0.21"
     nat_ip_address = yandex_vpc_address.addr_node1.external_ipv4_address[0].address
     nat       = true
@@ -122,7 +122,7 @@ resource "yandex_compute_instance" "prod_k8s_node2" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    subnet_id = yandex_vpc_subnet.prod_subnet.id
     ip_address = "10.0.0.22"
     nat_ip_address = yandex_vpc_address.addr_node2.external_ipv4_address[0].address
     nat       = true
@@ -156,7 +156,7 @@ resource "yandex_compute_instance" "prod_k8s_node3" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    subnet_id = yandex_vpc_subnet.prod_subnet.id
     ip_address = "10.0.0.23"
     nat_ip_address = yandex_vpc_address.addr_node3.external_ipv4_address[0].address
     nat       = true
