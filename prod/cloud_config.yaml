@@ -1,0 +1,8 @@
+#cloud-config
+ssh_pwauth: no
+users:
+  - name: zubarev_va
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCEoP7KcUsoKJING1b9BRQAX2cuYsi1BtBH5Yov3TReOw7OHTtjUZu4ZHl/YZJBdBQQe4wNBGmzgIe2Gv2tfqBJmXnUX4/gwcRlwCz5wjpWzf58aWK3dhebQpq75lr0c8OPj9ssHXl978AaGx4sgbXjObbfXmdwulxcwuc6Zr8Zt+WbozzihUjHSZTXGRCjqB3ClIR60zW6b5TsjMqnjoyZFyt5fksPl5NbQR1gig2WZh2P4QTKl+dvycjx+bxR8h5X7JDElJJRwGSLuUN5demQLadBx9Zd7dIMsV2OervPFDszU/Fm0dMkaG+eKzjSLGn1l/L60R0BC7AatepYDbIWzoeGCUUwHjroH6sr9GnA+wTyndgggWibHLydp3ahanlzscIqFsORM0Sc8B8O3pk4ArEi3gzwUz5nW8jGH8o21+B3AI+lE+JzAW71sE34TNjIJh0jGlcHdy1LmL5l9MKekbgk6PlvhSwe8IL1wd+VhuE0vQWCALPzFrQuNz18pk= zubarev_va@A000995"
