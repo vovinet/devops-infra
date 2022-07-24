@@ -16,12 +16,12 @@ resource "yandex_vpc_address" "addr_cp" {
   }
 }
 
-resource "yandex_vpc_address" "addr_node" {
-  name = "Worker Node Public IP"
-  external_ipv4_address {
-    zone_id = var.yc_zone
-  }
-}
+#resource "yandex_vpc_address" "addr_node" {
+#  name = "Worker Node Public IP"
+#  external_ipv4_address {
+#    zone_id = var.yc_zone
+#  }
+#}
 
 resource "yandex_compute_instance" "stage-k8s-cp1" {
   name = "stage-k8s-cp1"
@@ -79,6 +79,72 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
     subnet_id = yandex_vpc_subnet.stage-subnet.id
     ip_address = "10.0.0.11"
     nat_ip_address = "51.250.12.6"
+    nat       = true
+  }
+
+  metadata = {
+    user-data = file("cloud_config.yaml")
+  }
+
+  scheduling_policy {
+    preemptible = true
+  }
+}
+
+resource "yandex_compute_instance" "stage-k8s-node2" {
+  name = "stage-k8s-node2"
+  folder_id = var.folder_id
+
+  resources {
+    cores  = 2
+    core_fraction = 100
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = var.os_image_id
+      size = 20
+      type = "network-hdd"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    ip_address = "10.0.0.12"
+    nat       = true
+  }
+
+  metadata = {
+    user-data = file("cloud_config.yaml")
+  }
+
+  scheduling_policy {
+    preemptible = true
+  }
+}
+
+resource "yandex_compute_instance" "stage-k8s-node3" {
+  name = "stage-k8s-node3"
+  folder_id = var.folder_id
+
+  resources {
+    cores  = 2
+    core_fraction = 100
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = var.os_image_id
+      size = 20
+      type = "network-hdd"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    ip_address = "10.0.0.13"
     nat       = true
   }
 
