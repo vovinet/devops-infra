@@ -78,7 +78,6 @@ resource "yandex_compute_instance" "stage-k8s-node1" {
   network_interface {
     subnet_id = yandex_vpc_subnet.stage-subnet.id
     ip_address = "10.0.0.11"
-    nat_ip_address = yandex_vpc_address.addr_node3.external_ipv4_address[0].address
     nat       = true
   }
 
