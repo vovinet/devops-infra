@@ -219,7 +219,7 @@ resource "yandex_alb_backend_group" "myapp-bg" {
   http_backend {
     name = "test-http-backend"
     weight = 1
-    port = 8080
+    port = 30101
     target_group_ids = ["${yandex_alb_target_group.targetgroup01.id}"]
 
     load_balancing_config {
@@ -242,7 +242,7 @@ resource "yandex_alb_backend_group" "graphics-bg" {
   http_backend {
     name = "test-http-backend"
     weight = 1
-    port = 3000
+    port = 30100
     target_group_ids = ["${yandex_alb_target_group.targetgroup01.id}"]
 
     load_balancing_config {
