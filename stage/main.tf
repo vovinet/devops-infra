@@ -214,7 +214,7 @@ resource "yandex_alb_http_router" "stage-router" {
 
 
 resource "yandex_alb_backend_group" "myapp-bg" {
-  name      = "my-backend-group"
+  name      = "myapp-backend-group"
 
   http_backend {
     name = "test-http-backend"
@@ -237,7 +237,7 @@ resource "yandex_alb_backend_group" "myapp-bg" {
 }
 
 resource "yandex_alb_backend_group" "graphics-bg" {
-  name      = "my-backend-group"
+  name      = "grafana-backend-group"
 
   http_backend {
     name = "test-http-backend"
