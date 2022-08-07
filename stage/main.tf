@@ -187,13 +187,13 @@ resource "yandex_alb_backend_group" "myapp-bg" {
     load_balancing_config {
       panic_threshold = 50
     }    
-    healthcheck {
-      timeout = "1s"
-      interval = "1s"
-      http_healthcheck {
-        path  = "/"
-      }
-    }
+    # healthcheck {
+    #   timeout = "1s"
+    #   interval = "1s"
+    #   http_healthcheck {
+    #     path  = "/"
+    #   }
+    # }
     http2 = "true"
   }
 }
