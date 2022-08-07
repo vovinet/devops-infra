@@ -156,8 +156,8 @@ resource "yandex_compute_instance" "stage-k8s-node3" {
   }
 }
 
-resource "yandex_alb_target_group" "target01" {
-  name      = "K8s-target-group"
+resource "yandex_alb_target_group" "targetgroup01" {
+  name      = "targetgroup01"
 
   target {
     subnet_id = yandex_vpc_subnet.stage-subnet.id
@@ -174,6 +174,44 @@ resource "yandex_alb_target_group" "target01" {
     ip_address = "10.0.0.13"
   }
 }
+
+resource "yandex_alb_load_balancer" "stage-balancer" {
+  name        = "stage-load-balancer"
+
+  network_id  = yandex_vpc_network.stage-net.id
+
+  allocation_policy {
+    location {
+      zone_id   = var.yc_zone
+      subnet_id = yandex_vpc_subnet.stage-subnet.id 
+    }
+  }
+
+  listener {
+    name = "stage-listener"
+    endpoint {
+      address {
+        external_ipv4_address {
+        }
+      }
+      ports = [ 80 ]
+    }    
+    http {
+      handler {
+        http_router_id = yandex_alb_http_router.stage-router.id
+      }
+    }
+  }    
+}
+
+resource "yandex_alb_http_router" "stage-router" {
+  name      = "stage-http-router"
+  labels = {
+    tf-label    = "tf-label-value"
+    empty-label = ""
+  }
+}
+
 
 resource "yandex_alb_backend_group" "myapp-bg" {
   name      = "my-backend-group"
@@ -210,52 +248,15 @@ resource "yandex_alb_backend_group" "graphics-bg" {
     load_balancing_config {
       panic_threshold = 50
     }    
-    healthcheck {
-      timeout = "1s"
-      interval = "1s"
-      http_healthcheck {
-        path  = "/"
-      }
-    }
+    # healthcheck {
+    #   timeout = "1s"
+    #   interval = "1s"
+    #   http_healthcheck {
+    #     path  = "/"
+    #   }
+    # }
     http2 = "true"
   }
-}
-
-resource "yandex_alb_http_router" "stage-router" {
-  name      = "stage-http-router"
-  labels = {
-    tf-label    = "tf-label-value"
-    empty-label = ""
-  }
-}
-
-resource "yandex_alb_load_balancer" "stage-balancer" {
-  name        = "stage-load-balancer"
-
-  network_id  = yandex_vpc_network.stage-net.id
-
-  allocation_policy {
-    location {
-      zone_id   = "ru-central1-a"
-      subnet_id = yandex_vpc_subnet.stage-subnet.id 
-    }
-  }
-
-  listener {
-    name = "stage-listener"
-    endpoint {
-      address {
-        external_ipv4_address {
-        }
-      }
-      ports = [ 80 ]
-    }    
-    http {
-      handler {
-        http_router_id = yandex_alb_http_router.stage-router.id
-      }
-    }
-  }    
 }
 
 resource "yandex_alb_virtual_host" "vhost-graphics" {
