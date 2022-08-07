@@ -156,22 +156,22 @@ resource "yandex_compute_instance" "stage-k8s-node3" {
   }
 }
 
-resource "yandex_alb_target_group" "k8s-tg" {
+resource "yandex_alb_target_group" "k8s_tg" {
   name      = "K8s-target-group"
 
   target {
     subnet_id = "${yandex_vpc_subnet.stage-subnet.id}"
-    ip_address   = "${yandex_compute_instance.stage-k8s-node1.network_interface.0.ip_address}"
+    ip_address   = "${yandex_compute_instance.stage-k8s-node1[*].network_interface.0.ip_address}"
   }
 
   target {
     subnet_id = "${yandex_vpc_subnet.stage-subnet.id}"
-    ip_address   = "${yandex_compute_instance.stage-k8s-node2.network_interface.0.ip_address}"
+    ip_address   = "${yandex_compute_instance.stage-k8s-node2[*].network_interface.0.ip_address}"
   }
 
   target {
     subnet_id = "${yandex_vpc_subnet.stage-subnet.id}"
-    ip_address   = "${yandex_compute_instance.stage-k8s-node3.network_interface.0.ip_address}"
+    ip_address   = "${yandex_compute_instance.stage-k8s-node3[*].network_interface.0.ip_address}"
   }
 }
 
@@ -182,7 +182,7 @@ resource "yandex_alb_backend_group" "myapp-bg" {
     name = "test-http-backend"
     weight = 1
     port = 8080
-    target_group_ids = ["${yandex_alb_target_group.k8s-tg.id}"]
+    target_group_ids = ["${yandex_alb_target_group.k8s_tg.id}"]
 
     load_balancing_config {
       panic_threshold = 50
@@ -205,7 +205,7 @@ resource "yandex_alb_backend_group" "graphics-bg" {
     name = "test-http-backend"
     weight = 1
     port = 3000
-    target_group_ids = ["${yandex_alb_target_group.k8s-tg.id}"]
+    target_group_ids = ["${yandex_alb_target_group.k8s_tg.id}"]
 
     load_balancing_config {
       panic_threshold = 50
