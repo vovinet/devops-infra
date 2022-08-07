@@ -220,7 +220,7 @@ resource "yandex_alb_backend_group" "myapp-bg" {
     name = "test-http-backend"
     weight = 1
     port = 8080
-    target_group_ids = ["${yandex_alb_target_group.target01.id}"]
+    target_group_ids = ["${yandex_alb_target_group.targetgroup01.id}"]
 
     load_balancing_config {
       panic_threshold = 50
@@ -243,7 +243,7 @@ resource "yandex_alb_backend_group" "graphics-bg" {
     name = "test-http-backend"
     weight = 1
     port = 3000
-    target_group_ids = ["${yandex_alb_target_group.target01.id}"]
+    target_group_ids = ["${yandex_alb_target_group.targetgroup01.id}"]
 
     load_balancing_config {
       panic_threshold = 50
