@@ -156,7 +156,7 @@ resource "yandex_compute_instance" "stage-k8s-node3" {
   }
 }
 
-resource "yandex_alb_target_group" "k8s_tg" {
+resource "yandex_alb_target_group" "k8s-tg" {
   name      = "K8s-target-group"
 
   target {
