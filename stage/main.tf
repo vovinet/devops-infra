@@ -261,7 +261,7 @@ resource "yandex_alb_backend_group" "graphics-bg" {
 
 resource "yandex_alb_virtual_host" "vhost-graphics" {
   name      = "vhost-graphics"
-  authority = "graphics.zubarev.su"
+  authority = [ "graphics.zubarev.su" ]
   http_router_id = yandex_alb_http_router.stage-router.id
   route {
     name = "graphics"
@@ -276,7 +276,7 @@ resource "yandex_alb_virtual_host" "vhost-graphics" {
 
 resource "yandex_alb_virtual_host" "vhost-myapp" {
   name      = "vhost-myapp"
-  authority = "myapp.stage.zubarev.su"
+  authority = [ "myapp.stage.zubarev.su" ]
   http_router_id = yandex_alb_http_router.stage-router.id
   route {
     name = "myapp"
