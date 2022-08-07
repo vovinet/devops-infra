@@ -156,7 +156,7 @@ resource "yandex_compute_instance" "stage-k8s-node3" {
   }
 }
 
-resource "yandex_alb_target_group" "k8s_tg" {
+resource "yandex_alb_target_group" "target01" {
   name      = "K8s-target-group"
 
   target {
@@ -182,7 +182,7 @@ resource "yandex_alb_backend_group" "myapp-bg" {
     name = "test-http-backend"
     weight = 1
     port = 8080
-    target_group_ids = ["${yandex_alb_target_group.k8s_tg.id}"]
+    target_group_ids = ["${yandex_alb_target_group.target01.id}"]
 
     load_balancing_config {
       panic_threshold = 50
@@ -205,7 +205,7 @@ resource "yandex_alb_backend_group" "graphics-bg" {
     name = "test-http-backend"
     weight = 1
     port = 3000
-    target_group_ids = ["${yandex_alb_target_group.k8s_tg.id}"]
+    target_group_ids = ["${yandex_alb_target_group.target01.id}"]
 
     load_balancing_config {
       panic_threshold = 50
