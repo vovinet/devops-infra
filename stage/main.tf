@@ -160,18 +160,18 @@ resource "yandex_alb_target_group" "target01" {
   name      = "K8s-target-group"
 
   target {
-    subnet_id = "${yandex_vpc_subnet.stage-subnet.id}"
-    ip_address   = "${yandex_compute_instance.stage-k8s-node1.network_interface.0.ip_address}"
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    ip_address = "10.0.0.11"
   }
 
   target {
-    subnet_id = "${yandex_vpc_subnet.stage-subnet.id}"
-    ip_address   = "${yandex_compute_instance.stage-k8s-node2.network_interface.0.ip_address}"
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    ip_address = "10.0.0.12"
   }
 
   target {
-    subnet_id = "${yandex_vpc_subnet.stage-subnet.id}"
-    ip_address   = "${yandex_compute_instance.stage-k8s-node3.network_interface.0.ip_address}"
+    subnet_id = yandex_vpc_subnet.stage-subnet.id
+    ip_address = "10.0.0.13"
   }
 }
 
