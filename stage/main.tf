@@ -232,7 +232,7 @@ resource "yandex_alb_backend_group" "myapp-bg" {
     #     path  = "/"
     #   }
     # }
-    http2 = "true"
+    http2 = "false"
   }
 }
 
@@ -255,7 +255,7 @@ resource "yandex_alb_backend_group" "graphics-bg" {
     #     path  = "/"
     #   }
     # }
-    http2 = "true"
+    http2 = "false"
   }
 }
 
